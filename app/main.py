@@ -93,11 +93,18 @@ app.include_router(search_controller.router, prefix="/v1/physician-dashboard/sea
 app.include_router(dashboard_feedback_controller.router, prefix="/v1/physician-dashboard/search-bar/feedback", tags=["Physician Dashboard"])
 app.include_router(trends_controller.router, prefix="/v1/physician-dashboard/trends", tags=["Physician Dashboard Trends"])
 app.include_router(appointment_controller.router)
+from fastapi.responses import RedirectResponse
+
+@app.get("/", include_in_schema=False)
+def read_root():
+    return RedirectResponse(url="/docs")
+
 def main():
     """Entrypoint for the uv script."""
     workers = int(os.getenv("UVICORN_WORKERS", "1"))
     port = int(os.getenv("PORT", 8000))
-    reload_mode = workers == 1
+    # Disable reload by default in production; WatchFiles can break in container environments
+    reload_mode = os.getenv("ENVIRONMENT", "production") == "development"
     uvicorn.run("app.main:app", host="0.0.0.0", port=port, reload=reload_mode, workers=workers)
 
 if __name__ == "__main__":
