@@ -46,10 +46,7 @@ class AnalysisResult(CamelModel):
     key_points: list[str]
     evidence: list[EvidenceSource]
     created_at: float
-<<<<<<< HEAD
-=======
     accuracy_level: Literal["low", "medium", "high"] = "medium"
->>>>>>> python-engine
 
 
 class TrendResponse(AnalysisResult):

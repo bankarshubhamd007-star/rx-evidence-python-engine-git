@@ -1,9 +1,6 @@
 import time
 import uuid
-<<<<<<< HEAD
-=======
 from datetime import datetime, timezone
->>>>>>> python-engine
 
 from fastapi import APIRouter, Depends, HTTPException, Response, status
 from pymongo.errors import DuplicateKeyError
@@ -61,11 +58,7 @@ async def signup(req: SignupRequest, response: Response):
         "full_name": req.full_name,
         "phone": req.phone,
         "role": req.role.value,
-<<<<<<< HEAD
-        "created_at": time.time(),
-=======
         "created_at": datetime.now(timezone.utc).isoformat(),
->>>>>>> python-engine
     }
     try:
         await UserRepository.create_user(user_doc)
@@ -111,11 +104,7 @@ async def google_login(req: GoogleAuthRequest, response: Response):
             "full_name": profile.get("name", "Unknown"),
             "phone": None,
             "role": UserRole.PATIENT.value, # Default role
-<<<<<<< HEAD
-            "created_at": time.time(),
-=======
             "created_at": datetime.now(timezone.utc).isoformat(),
->>>>>>> python-engine
             "date_of_birth": None,
             "gender": None,
             "subscription_tier": "free",

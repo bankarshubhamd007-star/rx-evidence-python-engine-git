@@ -26,17 +26,6 @@ class MongoRepository:
                 "key_points": result.key_points,
                 "evidence": [ev.model_dump() for ev in result.evidence],
                 "created_at": result.created_at,
-<<<<<<< HEAD
-                "count": 1,
-                "feedback": {
-                    "positive": 0,
-                    "negative": 0,
-                    "none": 1
-                }
-            }
-            
-            await collection.insert_one(document)
-=======
                 "accuracy_level": getattr(result, "accuracy_level", "medium"),
             }
             
@@ -55,7 +44,6 @@ class MongoRepository:
                 },
                 upsert=True
             )
->>>>>>> python-engine
             logger.info(f"[MongoRepository] Successfully saved analysis result {result.id} to chrome-extension collection.")
             
             if user_id:

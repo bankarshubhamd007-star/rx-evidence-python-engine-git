@@ -250,10 +250,7 @@ class LLMSynthesizer:
                 key_points=parsed.get("keyPoints", []),
                 evidence=valid_evidence,
                 created_at=time.time(),
-<<<<<<< HEAD
-=======
                 accuracy_level=accuracy_level,
->>>>>>> python-engine
             )
         except Exception as e:
             logger.error(f"Failed to validate AnalysisResult structure. JSON:\n{parsed}")
