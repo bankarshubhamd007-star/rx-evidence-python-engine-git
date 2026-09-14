@@ -96,14 +96,9 @@ app.include_router(appointment_controller.router)
 def main():
     """Entrypoint for the uv script."""
     workers = int(os.getenv("UVICORN_WORKERS", "1"))
-<<<<<<< HEAD
-    reload_mode = workers == 1
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=reload_mode, workers=workers)
-=======
     port = int(os.getenv("PORT", 8000))
     reload_mode = workers == 1
     uvicorn.run("app.main:app", host="0.0.0.0", port=port, reload=reload_mode, workers=workers)
->>>>>>> python-engine
 
 if __name__ == "__main__":
     main()
