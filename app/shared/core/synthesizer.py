@@ -12,6 +12,7 @@ from __future__ import annotations
 import json
 import logging
 import time
+import datetime
 import uuid
 import json_repair
 
@@ -50,7 +51,7 @@ class LLMSynthesizer:
                 summary="No relevant medical evidence was found for this claim.",
                 key_points=["Insufficient data across all queried providers."],
                 evidence=[],
-                created_at=time.time(),
+                created_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),
             )
 
         # 1. Format the evidence context for the LLM
@@ -249,7 +250,7 @@ class LLMSynthesizer:
                 summary=str(parsed.get("summary", "No relevant information found.")),
                 key_points=parsed.get("keyPoints", []),
                 evidence=valid_evidence,
-                created_at=time.time(),
+                created_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                 accuracy_level=accuracy_level,
             )
         except Exception as e:

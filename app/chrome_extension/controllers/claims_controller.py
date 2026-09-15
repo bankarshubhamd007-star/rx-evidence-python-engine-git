@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, BackgroundTasks, Depends
 import uuid
 import time
+import datetime
 import logging
 
 from app.auth.dependencies import get_current_user_optional
@@ -67,7 +68,7 @@ async def analyze_claims_batch(
                 summary=f"Analysis failed: {str(e)}",
                 key_points=["Error during processing."],
                 evidence=[],
-                created_at=time.time()
+                created_at=datetime.datetime.now(datetime.timezone.utc).isoformat()
             )
 
     results = await asyncio.gather(*[process_claim(c) for c in unique_claims])

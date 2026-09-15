@@ -15,6 +15,7 @@ import asyncio
 import json
 import logging
 import time
+import datetime
 import uuid
 
 from app.shared.core.cache import feedback_link_cache
@@ -72,7 +73,7 @@ class EvidenceEngine:
                     cached_data["id"] = uuid.uuid4().hex
                     cached_data["claim"] = claim
                     if "created_at" not in cached_data and "createdAt" not in cached_data:
-                        cached_data["created_at"] = time.time()
+                        cached_data["created_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
                     
                     # Create and cache the result
                     analysis_result = AnalysisResult(**cached_data)

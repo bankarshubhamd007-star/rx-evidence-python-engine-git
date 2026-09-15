@@ -45,7 +45,7 @@ class AnalysisResult(CamelModel):
     summary: str
     key_points: list[str]
     evidence: list[EvidenceSource]
-    created_at: float
+    created_at: str
     accuracy_level: Literal["low", "medium", "high"] = "medium"
 
 

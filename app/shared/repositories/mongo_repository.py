@@ -57,6 +57,7 @@ class MongoRepository:
         """Saves the relationship between a user and a claim they analyzed."""
         try:
             import time
+            import datetime
             client = get_mongo_client()
             db = client[settings.mongodb_db_name]
             collection = db["user_claims"]
@@ -64,7 +65,7 @@ class MongoRepository:
             document = {
                 "user_id": user_id,
                 "claim_id": claim_id,
-                "created_at": time.time()
+                "created_at": datetime.datetime.now(datetime.timezone.utc).isoformat()
             }
             # Use upsert to avoid duplicate entries for the same user and claim
             await collection.update_one(
