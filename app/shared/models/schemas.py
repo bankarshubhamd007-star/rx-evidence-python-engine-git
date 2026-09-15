@@ -3,8 +3,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import Literal
 
-import datetime
-from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
 from pydantic.alias_generators import to_camel
 
 
@@ -48,13 +47,6 @@ class AnalysisResult(CamelModel):
     evidence: list[EvidenceSource]
     created_at: str
     accuracy_level: Literal["low", "medium", "high"] = "medium"
-
-    @field_validator("created_at", mode="before")
-    @classmethod
-    def coerce_created_at(cls, v):
-        if isinstance(v, (float, int)):
-            return datetime.datetime.fromtimestamp(v, tz=datetime.timezone.utc).isoformat()
-        return v
 
 
 class TrendResponse(AnalysisResult):
